@@ -1,0 +1,141 @@
+<html>
+
+<head>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static\bootstrap.css">
+    <script src="static\jquery-3.4.1.min.js"></script>
+
+    <script src="static\bootstrap.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+
+    <title>Accountant</title>
+    <style>
+        #button
+        {
+            text-align: center;
+        }
+        #C1
+        {
+            border: 2px solid black;
+        }
+
+        #pic {
+            border: solid black;
+        }
+
+        #C2
+        {
+            border-right: 2px solid black;
+        }
+
+        #heading
+        {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Payal lakhotia</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="accountant_home">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="contact">Contact Us</a>
+                </li>
+
+
+            </ul>
+            <form method="post" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="T1">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <div class="mx-2">
+                <a class="btn btn-danger" href="logout" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                        height="20" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                    </svg>
+                    Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <div id="C1" class="card-group my-2">
+            <!--Student details-->
+            <div class="card">
+                <div id="C2" class="card-body bg-light">
+                    <h2 id="heading">Student Details</h2><br />
+                    {% if kota %}
+                    {% for reg in kota %}
+                    <p><b>Name</b>:{{reg[1]}}</p>
+                    <p><b>Registration No.</b>:{{reg[0]}}</p>
+                    <p><b>Address</b>:{{reg[2]}}</p>
+                    <p><b>Contact No.</b>:{{reg[3]}}</p>
+                    <p><b>Email</b>:{{reg[4]}}</p>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <!--End of details-->
+
+
+            <!--pic -->
+            <div class="card">
+                <div id="C2" class="card-body bg-light">
+                    <h2 id="heading">Student Picture</h2><br/>
+                    {% if kota %}
+                    {% for reg in kota %}
+                    <p align="center"><img id="pic" src="../static/photos/{{reg[5]}}" width="200" height="200" /></p>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+            </div>
+            <!--End of pic-->
+
+
+            <div class="card">
+                <div id="button" class="card-body bg-light">
+                    <h2 id="heading">Button</h2><br/>
+                    {% if kota %}
+                    {% for reg in kota %}
+                    <form method="post" action="edit_student">
+                        <input type="hidden" name="H1" value="{{reg[0]}}" />
+                        <input type="submit" name="B1" value="Edit" />
+                    </form>
+
+                    <form method="post" action="delete_student">
+                        <input type="hidden" name="H1" value="{{reg[0]}}" />
+                        <input type="submit" name="B1" value="Delete" />
+                    </form>
+
+                    <form method="post" action="info">
+                        <input type="hidden" name="H1" value="{{reg[0]}}" />
+                        <input type="submit" name="B1" value="Info" />
+                    </form>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

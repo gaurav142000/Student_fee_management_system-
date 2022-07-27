@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static\bootstrap.css">
+    <script src="static\jquery-3.4.1.min.js"></script>
+
+    <script src="static\bootstrap.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Contact To Admin</title>
+    <style>
+        #H1 {
+            text-align: center;
+        }
+
+        #T1 {
+            text-align:center;
+            margin-top: 150px;
+           
+        }
+        #H3{
+            margin-left: -30px;
+        }
+        #H2
+        {
+            margin-left: 60px;
+        }
+        
+    </style>
+</head>
+
+
+<body class="bg-light">
+    <h2 id="H1"><i>Contact To Admin</i> </h2><br />
+    {% if kota %}
+
+
+
+    {% for admin in kota %}
+
+    <div id="T1">
+        <h3>{{admin[0]}}</h3><br/>
+        <p id="H3"><b>Contact No.</b>:{{admin[2]}}</p>
+        <p><b>Email</b>:{{admin[3]}}</p>
+        <p id="H2"><i><b>Contact Timing:9:30 AM to 9:30 PM</b></i></p>
+    </div>
+    {% endfor %}
+
+
+    {% elif msg %}
+    <h3>{{msg}}</h3>
+    {% endif %}
+</body>
+
+</html>

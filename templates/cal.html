@@ -1,0 +1,30 @@
+<form method="post" action="cal" id="calculator_form">
+    <label for="input 1">Input1:</label>
+    <input type="text" name="Input1" id="Input1">
+    <br>
+    <label for="input2">Input2:</label>
+    <input type="text" name="Input2" id="Input2">
+    <br>
+    <label for="operation">operation</label>
+    <select id="operation" name="operation">
+        <option value="+">Addition</option>
+        <option value="-">Subtraction</option>
+        <option value="*">Multiplication</option>
+        <option value="/">Division</option>
+        <option value="%">Modulus</option>
+    </select>
+    <br/>
+    <input type="submit" value="Submit"/>
+    <input type="reset" value="Reset" style="color: red;"/>
+</form>
+
+{% if calculation_success==True %}
+  <br/>
+  <p>The calculation for {{input1}} {{operation}} {{input2}} is: {{result}}</p>
+{% endif %}
+
+{% if calculation_success==False %}
+   <br/>
+   <p>{{error}}</p>
+   <p>{{input1}} {{operation}} {{input2}} = "{{result}}"</p>
+{% endif %}

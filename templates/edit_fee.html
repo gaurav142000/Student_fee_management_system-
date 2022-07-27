@@ -1,0 +1,73 @@
+<html>
+
+<head>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="static\bootstrap.css">
+  <script src="static\jquery-3.4.1.min.js"></script>
+
+  <script src="static\bootstrap.js"></script>
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+
+  <title>Student Fee</title>
+  <style>
+    h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+
+  <h1>Edit Student's Fees Details</h1>
+
+  {% if kota %}
+  <form method="post" action="edit_fee1" class="row g-3 my-2 mx-2">
+    <div class="col-md-4">
+      <label for="inputno" class="form-label">Transaction No.</label>
+      <input readonly type="text" name="T1" value="{{kota[0]}}" class="form-control" id="inputno.">
+    </div>
+    <div class="col-md-4">
+      <label for="inputreg" class="form-label">Registration No.</label>
+      <input type="text" name="T2" value="{{kota[1]}}" class="form-control" id="inputreg">
+    </div>
+    <div class="col-3">
+      <label for="inputcouid" class="form-label">Course Id</label>
+      <input type="text" name="T3" value="{{kota[2]}}" class="form-control" id="inputcouid">
+    </div>
+    <div class="col-4 my-4">
+      <label for="inputamt" class="form-label">Amount</label>
+      <input type="text" name="T4" value="{{kota[3]}}" class="form-control" id="inputamt">
+    </div>
+  
+    <div class="col-4 my-4">
+      <label for="inputdep_date" class="form-label">Deposition Date</label>
+      <input type="date" name="T5" value="{{kota[4]}}" class="form-control" id="inputdep_date">
+    </div>
+  
+    <div class="col-md-4 my-4">
+      <label for="inputremark" class="form-label">Remark</label>
+      <input type="text" name="T6" value="{{kota[5]}}" class="form-control" id="inputremark">
+    </div>
+   
+    
+    
+    <div class="col-12 my-4">
+        <input type="submit" class="btn btn-primary" name="B1" value="Edit" /></p>
+      
+       
+    </div>
+  </form>
+  
+  {% elif msg %}
+    <h3>{{msg}}</h3>
+  {% endif %}
+
+  
+
+
+</body>
+
+</html>
+

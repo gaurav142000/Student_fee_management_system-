@@ -1,0 +1,292 @@
+<html>
+
+<head>
+    <!--link all files-->
+    <link rel="stylesheet" href="static\bootstrap.css">
+    <script src="static\jquery-3.4.1.min.js"></script>
+
+    <script src="static\bootstrap.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="static\info_style.css" rel="stylesheet" type="text/css">
+
+    <title>Student Information</title>
+
+    <style>
+        #F1 {
+            text-align: center;
+
+        }
+
+        #A1 {
+            width: 100%;
+            border: 2px solid black;
+        }
+
+        #B1 {
+            text-align: right;
+        }
+
+        #H1 {
+            border: 2px solid black;
+
+        }
+
+        #st_data {
+            border: 2px solid black;
+        }
+
+        #pic {
+            border: solid black;
+        }
+
+        #card1 {
+            border-right: 2px solid black;
+        }
+
+        #card2 {
+
+            border-right: 2px solid black;
+        }
+
+        #main {
+            border: 10px solid chocolate;
+        }
+    </style>
+
+
+</head>
+
+<body id="main" class="bg-light">
+    <div class="bg-light">
+        <!--Nav Bar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <a class="navbar-brand" href="#">Payal Lakhotia</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="accountant_home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="search">Search Students</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title="Contact To Admin"
+                            href="contact">Contact Us</a>
+                    </li>
+
+
+                </ul>
+
+                <div class="mx-2">
+      <a class="btn btn-danger" href="logout" role="button" data-bs-toggle="tooltip"
+      data-bs-placement="top" title="Logout"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+          height="20" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
+          <path
+            d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+        </svg>
+        Logout</a>
+    </div>
+            </div>
+        </nav>
+
+        
+
+        <!--st_data-->
+        <div id="st_data" class="card-group my-4 ">
+            <div id="card1" class="card bg-light">
+
+                <div class="card-body">
+                    <h2 id="F1"><i> Student Details</i></h2><br>
+                    {% if data1 %}
+                    {% for reg in data1 %}
+
+                    <p><b>Name</b>:{{reg[1]}}</p>
+                    <p><b>Registration No.</b>:{{reg[0]}}</p>
+                    <p><b>Address</b>:{{reg[2]}}</p>
+                    <p><b>Contact No.</b>:{{reg[3]}}</p>
+                    <p><b>Email</b>:{{reg[4]}}</p>
+
+                    <form method="post" action="edit_student">
+                        <input type="hidden" name="H1" value="{{reg[0]}}" />
+                        <input type="submit" name="B1" value="Edit" />
+                    </form>
+
+
+                    {% endfor%}
+                    {% endif %}
+                </div>
+            </div>
+            <!--End of st_data-->
+           
+            <!--image-->
+            <div class="card bg-light">
+                <div class="card-body ">
+                    <h2 id="F1"><i>Student Picture</i></h2>
+                    {% if data1 %}
+                    {% for reg in data1 %}
+                    <p align="center"><img id="pic" src="../static/photos/{{reg[5]}}" width="200" height="200" /></p>
+                    {% endfor%}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!--End of image-->
+
+        <!--St_course-->
+        <h2 class="my-4" id="F1"><i>Student Course Details</i></h2>
+        <div id="B1" class="col-12 my-4">
+            <a class="btn btn-danger" style="text-align: right;" href="st_course" role="button" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Add Courses">Add Courses</a>
+        </div>
+        <table id="A1" class="table table-bordered bg-light my-2 " width="100%">
+            <thead>
+
+                <tr id="F1">
+                    <th id="H1" scope="col">SNo</th>
+                    <th id="H1" scope="col">Course Id</th>
+                    <th id="H1" scope="col">Registration No</th>
+                    <th id="H1" scope="col">Course</th>
+                    <th id="H1" scope="col">Course Fees</th>
+                    <th id="H1" scope="col">Remark</th>
+                    <th id="H1" scope="col">Edit</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if data2 %}
+                {% for couid in data2 %}
+                <tr id="F1">
+                    <th id="H1" scope="row">{{loop.index}}</th>
+                    <td id="H1">{{couid[0]}}</td>
+                    <td id="H1">{{couid[1]}}</td>
+                    <td id="H1">{{couid[2]}}</td>
+                    <td id="H1">{{couid[3]}}</td>
+                    <td id="H1">{{couid[4]}}</td>
+                    <td id="H1">
+                        <form method="post" action="edit_course">
+                            <input type="hidden" name="H1" value="{{couid[0]}}" />
+                            <input type="submit" name="B1" value="Edit" />
+                        </form>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+
+        <!--End of st_course-->
+        <p><b>Total Amount:-{{f}}</b></p>
+
+
+       
+        <!--Table of Fee-->
+        <h2 class="my-4" id="F1"><i>Student Fee Details</i></h2>
+
+        <div id="B1" class="col-12 my-4">
+            <a class="btn btn-danger" style="text-align: right;" href="st_fee" role="button" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Installments">Installment</a>
+        </div>
+
+        <table id="A1" class="table table-bordered bg-light my-2 " width="100%">
+            <thead>
+                <tr id="F1">
+                    <th id="H1" scope="col">SNo</th>
+                    <th id="H1" scope="col">Transaction No.</th>
+                    <th id="H1" scope="col">Registration No.</th>
+                    <th id="H1" scope="col">Course Id</th>
+                    <th id="H1" scope="col">Amount</th>
+                    <th id="H1" scope="col">Deposition Date</th>
+                    <th id="H1" scope="col">Remark</th>
+                    <th id="H1" scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% if data3 %}
+                {% for fee in data3 %}
+
+                <tr id="F1">
+                    <th id="H1" scope="row">{{loop.index}}</th>
+                    <td id="H1">{{fee[0]}}</td>
+                    <td id="H1">{{fee[1]}}</td>
+                    <td id="H1">{{fee[2]}}</td>
+                    <td id="H1">{{fee[3]}}</td>
+                    <td id="H1">{{fee[4]}}</td>
+                    <td id="H1">{{fee[5]}}</td>
+                    <td id="H1">
+                        <form method="post" action="edit_fee">
+                            <input type="hidden" name="H1" value="{{fee[0]}}" />
+                            <input type="submit" name="B1" value="Edit" />
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+                
+            </tbody>            
+
+        </table>
+        
+        {% if msg %}
+
+
+        
+        <h3>{{msg}}</h3>
+        {% endif %}
+        <p><b>Total Installment Deposited:-{{c}}</b></p>
+        <p><b>Remaining:-{{remaining}}</b></p>
+
+        <!--Calculator
+        <div class="Contaner">
+            <div class="card border-dark mb-3" style="max-width: 18rem;">
+                <div class="card-header">Calculator</div>
+                <form method="post" action="cal" id="calculator_form">
+                    <label for="input 1">Input1:</label>
+                    <input type="text" name="Input1" id="Input1">
+                    <br>
+                    <label for="input2">Input2:</label>
+                    <input type="text" name="Input2" id="Input2">
+                    <br>
+                    <label for="operation">operation</label>
+                    <select id="operation" name="operation">
+                        <option value="+">Addition</option>
+                        <option value="-">Subtraction</option>
+                        <option value="*">Multiplication</option>
+                        <option value="/">Division</option>
+                        <option value="%">Modulus</option>
+                    </select>
+                    <br />
+                    <input type="submit" value="Submit" />
+                    <input type="reset" value="Reset" style="color: red;" />
+                </form>
+
+                {% if calculation_success==True %}
+                <br />
+                <p>The calculation for {{input1}} {{operation}} {{input2}} is: {{result}}</p>
+                {% endif %}
+
+                {% if calculation_success==False %}
+                <br />
+                <p>{{error}}</p>
+                <p>{{input1}} {{operation}} {{input2}} = "{{result}}"</p>
+                {% endif %}
+            </div>
+        </div>-->
+        <p align="right"><a href="#">Back to top</a></p>
+
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>
