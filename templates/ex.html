@@ -1,107 +1,248 @@
-<html>
+{% extends 'u1.html' %}
+{% load static %}
+{% block a1 %}
 
-<head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="static\bootstrap.css">
-    <script src="static\jquery-3.4.1.min.js"></script>
 
-    <script src="static\bootstrap.js"></script>
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-   
-    <style>
-      h1 {text-align: center;}
-  </style>
+<h1 align="center">Booking Details</h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="my-4">
+  {% if bus %}
+  {% for b in bus %}
+  <p>Bus No:{{b.bno}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Bus Name:{{b.bname}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {% endfor %}
+    {% endif %}
 
-    <title>Accountant Home</title>
-</head>
-<body>
+    {% if route %}
+    {% for r in route %}
+    Source:{{r.source}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Destination:{{r.destination}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Route Id:{{r.r_id}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Time:{{r.time}}</p>
+  {% endfor %}
+  {% endif %}
+</div>
+<form method="post" action="../booking_reg/">
+  {% csrf_token %}
+  <table border="1" style="border-collapse: collapse" width=" 100%" height="60%">
+    <tr>
+      <td>
+        <br />
+        <p>Bus no<input type="text" name="T1" /></p>
+        <p>Route Id<input type="text" name="T2" /></p>
+        <p>Name<input type="text" name="T3" /></p>
+        <p>Age<input type="text" name="T4" /></p>
+        <p>Gender<input type="text" name="T5" /></p>
+        <p>Date<input type="date" name="T6" /></p><br />
+      </td>
 
-    <!--Nav Bar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">{{name}}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            
-    
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Courses
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">C Programming</a>
-                <a class="dropdown-item" href="#">DSA</a>
-                <a class="dropdown-item" href="#">Python</a>
-                
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact">Contact Us</a>
-            </li>
-    
-    
-          </ul>
-          
+    </tr>
+
+    <tr>
+      <td>
+        <br />
+        {% if route %}
+        {% for r in route %}
+        <p>Fare:<input readonly type="text" name="F" value="{{r.fare}}" /></p>
+        {% endfor %}
+        {% endif %}
+        <p>Card no<input type="text" name="T7" /></p>
+        <p>CVV<input type="password" name="T8" /></p>
+        <p>Valid From<input type="text" name="T9" /></p>
+        <p>Valid Upto<input type="text" name="T10" /></p>
+        <p><input type="submit" name="B1" value="Pay"></p>
+
+      </td>
+    </tr>
+  </table>
+</form>
+
+{% if result %}
+<h2>{{result}} and ticket_no is {{ticket_no}} </h2>
+{% endif %}
+
+
+
+<div class="row g-5">
+  <div class="col-md-5 col-lg-4 order-md-last">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+      <span class="text-primary">Your cart</span>
+      <span class="badge bg-primary rounded-pill">3</span>
+    </h4>
+    <ul class="list-group mb-3">
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">Product name</h6>
+          <small class="text-muted">Brief description</small>
         </div>
-          <div class="mx-2">
-            <a class="btn btn-danger" href="logout" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                height="20" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
-                <path
-                  d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-              </svg>
-                Logout</a>
+        <span class="text-muted">$12</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">Second product</h6>
+          <small class="text-muted">Brief description</small>
+        </div>
+        <span class="text-muted">$8</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">Third item</h6>
+          <small class="text-muted">Brief description</small>
+        </div>
+        <span class="text-muted">$5</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between bg-light">
+        <div class="text-success">
+          <h6 class="my-0">Promo code</h6>
+          <small>EXAMPLECODE</small>
+        </div>
+        <span class="text-success">−$5</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Total (USD)</span>
+        <strong>$20</strong>
+      </li>
+    </ul>
+
+    <form class="card p-2">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Promo code">
+        <button type="submit" class="btn btn-secondary">Redeem</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Billing address</h4>
+    <form class="needs-validation" novalidate="">
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <label for="firstName" class="form-label">Bus No.</label>
+          <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            Valid first name is required.
           </div>
         </div>
-      </nav>
+
+        <div class="col-sm-6">
+          <label for="lastName" class="form-label">Route Id</label>
+          <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            Valid last name is required.
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <label for="lastName" class="form-label">Name</label>
+          <input type="text" class="form-control" id="lastName" placeholder=" Enter Full Name" value="" required="">
+          <div class="invalid-feedback">
+            Valid last name is required.
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <label for="lastName" class="form-label">Age</label>
+          <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            Valid last name is required.
+          </div>
+        </div>
+
+        <div class="col-sm-6 my-4">
+          <label for="country" class="form-label">Gender</label>
+          <select class="form-select" id="country" required="">
+            <option value="">Choose...</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+          <div class="invalid-feedback">
+            Please select a valid country.
+          </div>
+        </div>
 
 
+        <div class="col-sm-6">
+          <label for="lastName" class="form-label">Date</label>
+          <input type="date" class="form-control" id="lastName" placeholder="" value="" required="">
+          <div class="invalid-feedback">
+            Valid last name is required.
+          </div>
+        </div>
 
-    <h1>Accountant Home-{{name}}</h1>
+        <hr class="my-4">
 
-    {% if photo=='no' %}
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="same-address">
+          <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
+        </div>
 
-    <form method="post" action="accountant_home" enctype="multipart/form-data">
-        File<input type="file" name="F1" />
-        <input type="submit" name="B1" value="UPLOAD" />
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="save-info">
+          <label class="form-check-label" for="save-info">Save this information for next time</label>
+        </div>
+
+        <hr class="my-4">
+
+        <h4 class="mb-3">Payment</h4>
+
+        <div class="my-3">
+          <div class="form-check">
+            <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
+            <label class="form-check-label" for="credit">Credit card</label>
+          </div>
+          <div class="form-check">
+            <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required="">
+            <label class="form-check-label" for="debit">Debit card</label>
+          </div>
+          <div class="form-check">
+            <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
+            <label class="form-check-label" for="paypal">PayPal</label>
+          </div>
+        </div>
+
+
+        <div class="row gy-3">
+          <div class="col-md-6">
+            <label for="cc-name" class="form-label">Name on card</label>
+            <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+            <small class="text-muted">Full name as displayed on card</small>
+            <div class="invalid-feedback">
+              Name on card is required
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="cc-number" class="form-label">Credit card number</label>
+            <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+            <div class="invalid-feedback">
+              Credit card number is required
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="cc-expiration" class="form-label">Expiration</label>
+            <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+            <div class="invalid-feedback">
+              Expiration date required
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label for="cc-cvv" class="form-label">CVV</label>
+            <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+            <div class="invalid-feedback">
+              Security code required
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
     </form>
-
-    {% if result %}
-    <h3>{{result}}</h3>
-    {% endif %}
-
-    {% else %}
-    <img src="../static/photos/{{photo}}" width="150" height="200" />
-    <p><a href="accountant_ch_photo">Change Photo</a></p>
-
-    {% endif %}
-
-
-    <p><a href="st_reg">Student Registration</a></p>
-    <p><a href="show_student">Show Student</a></p><br>
-
-    <p><a href="st_course">Student Course</a></p>
-    <p><a href="show_course">Show Course</a></p><br>
-
-
-    <p><a href="st_fee">Students Fee</a></p>
-    <p><a href="show_fee">Show Fee</a></p>
-
-
-    <p><a href="search">Search</a></p>
+  </div>
+</div>
 
 
 
-
-    <p><a href="login"><b>Logout</b></a> </p>
-</body>
-
-</html>
+{% endblock %}

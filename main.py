@@ -209,7 +209,7 @@ def admin_pro2():
     else:
         return redirect(url_for("auth_error"))
 
-#Admin Chnage Password
+#Admin Change Password
 @app.route("/admin_ch_pass",methods=['GET','POST'])
 def admin_ch_pass():
     if("usertype" in session):
@@ -836,7 +836,7 @@ def search():
             if(request.method=="POST"):
                 name=request.form["T1"]
                 cur=make_connection()
-                sql="select * from st_data where name='"+name+"'"
+                sql="select * from st_data where name LIKE  '%"+name+"%'"
                 cur.execute(sql)
                 data=cur.fetchall()
                 return render_template("search.html",kota=data)
